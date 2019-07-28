@@ -8,11 +8,20 @@ export default [
     }
   },
   {
-    id: 'EmpoymentPeriod',
+    id: 'EmploymentPeriod1',
     fieldType: 'RadioButtonField',
     fieldProps: {
       name: 'employment_period',
-      values: ['Fixed Term', 'Permanent']
+      value: 'Fixed Term',
+      checked: true
+    }
+  },
+  {
+    id: 'EmploymentPeriod2',
+    fieldType: 'RadioButtonField',
+    fieldProps: {
+      name: 'employment_period',
+      value: 'Permanent'
     }
   },
   {
