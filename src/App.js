@@ -2,23 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Fields from './Fields';
 
-const DEFAULT_SCHEME = [
-  {
-    id: 'ClientName',
-    fieldType: 'TextField',
-    fieldProps: {
-      name: 'name',
-      placeholder: 'John Doe'
-    }
-  },
-  {
-    id: 'StartDate',
-    fieldType: 'DateField',
-    fieldProps: {
-      name: 'start'
-    }
-  }
-];
+import DEFAULT_SCHEME from './default-scheme';
 
 function App() {
   const [validScheme, setValidScheme] = useState(true);
