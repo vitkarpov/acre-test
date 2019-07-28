@@ -9,7 +9,7 @@ const RadioButtonField = ({ name, value, checked, required, onChange }) => (
       value={value}
       required={required}
       checked={checked}
-      onChange={(e) => onChange(name, e.target.checked)}
+      onChange={(e) => onChange(name, e.target.value)}
     />
     {value}
   </label>

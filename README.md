@@ -20,6 +20,7 @@ Each item in array of fields should have the following properties:
 - `id` (unique identifier)
 - `fieldType` (enum of field types)
 - `fieldProps` (object with all the props a particular field needs)
+- `defaultChecked` (applicable for checkboxes and radiobuttons)
 
 Default scheme (in `default-scheme.js`):
 

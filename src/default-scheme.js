@@ -13,9 +13,9 @@ export default [
     fieldType: 'RadioButtonField',
     fieldProps: {
       name: 'employment_period',
-      value: 'Fixed Term',
-      checked: true
-    }
+      value: 'Fixed Term'
+    },
+    defaultChecked: true
   },
   {
     id: 'EmploymentPeriod2',
@@ -30,6 +30,7 @@ export default [
     fieldType: 'CheckboxField',
     fieldProps: {
       name: 'current_employment',
+      value: 'yes',
       label: 'I currently work here'
     }
   },

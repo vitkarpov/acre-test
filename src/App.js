@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Fields from './Fields';
 
@@ -9,9 +9,17 @@ function App() {
   const [scheme, setScheme] = useState(JSON.stringify(DEFAULT_SCHEME, null, 2));
   const [formState, setFormState] = useState({});
 
+  useEffect(() => {
+    try {
+      setFormState(getDefaultState(JSON.parse(scheme)));
+    } catch (e) {
+      setFormState({});
+    }
+  }, [scheme])
+
   return (
-    <div className="app">
-      <form className="app-scheme-form">
+    <div className="app app-layout-cols">
+      <form className="app-layout-cell">
         <fieldset className="app-scheme-form-fieldset">
           <legend className="app-scheme-form-header">
             Enter your JSON <span role="img" aria-label="here">👇</span>
@@ -32,22 +40,20 @@ function App() {
             }}
           />
         </fieldset>
-        <fieldset className="app-scheme-form-fieldset">
-          <button className="app-submit" type="submit">Update</button>
-        </fieldset>
       </form>
-      <div className="app-layout">
-        <div className="app-col">
+      <div className="app-layout-cell app-layout-rows">
+        <div className="app-layout-cell">
           <h2>Data Driven Form</h2>
           {validScheme &&
             <DataDrivenForm
               scheme={JSON.parse(scheme)}
+              formState={formState}
               onSubmit={(state) => setFormState(state)}
             />
           }
           {!validScheme && <div>Scheme parsing failed</div>}
         </div>
-        <div className="app-col">
+        <div className="app-layout-cell">
           <h2>Form state</h2>
           <pre>{JSON.stringify(formState, null, 2)}</pre>
         </div>
@@ -56,8 +62,8 @@ function App() {
   );
 }
 
-function DataDrivenForm({ scheme, onSubmit }) {
-  const [state, setState] = useState({});
+function DataDrivenForm({ scheme, formState, onSubmit }) {
+  const [state, setState] = useState(formState);
   // Object.assign is necessary here to create a new object for the next state,
   // Otherwise React sees the same reference at does not rerender
   const onChange = (name, value) => setState(Object.assign({}, state, { [name]: value }));
@@ -71,8 +77,16 @@ function DataDrivenForm({ scheme, onSubmit }) {
       }}
     >
       <div className="app-data-form-lines-wrapper">
-        {scheme.map(({ id, fieldType, fieldProps }) => {
+        {scheme.map(({ id, fieldType, fieldProps, defaultChecked }) => {
           const Field = Fields[fieldType];
+
+          if (fieldType === 'RadioButtonField' || fieldType === 'CheckboxField') {
+            if (typeof state[fieldProps.name] !== 'undefined') {
+              fieldProps.checked = state[fieldProps.name] === fieldProps.value;
+            } else {
+              fieldProps.checked = !!defaultChecked;
+            }
+          }
 
           return (
             <div className="app-data-form-line" key={id}>
@@ -85,6 +99,15 @@ function DataDrivenForm({ scheme, onSubmit }) {
       <button className="app-submit" type="submit">Go!</button>
     </form>
   )
+}
+
+function getDefaultState(scheme) {
+  return scheme.reduce((result, { fieldType, fieldProps, defaultChecked }) => {
+    if ((fieldType === 'RadioButtonField' || fieldType === 'CheckboxField') && defaultChecked) {
+      result[fieldProps.name] = fieldProps.value;
+    }
+    return result;
+  }, {});
 }
 
 export default App;
