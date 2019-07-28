@@ -55,7 +55,8 @@ export default [
     fieldType: 'DateField',
     fieldProps: {
       name: 'end_date'
-    }
+    },
+    hideIfChecked: ['CurrentEmployment']
   },
   {
     id: 'ContactNumber',

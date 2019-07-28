@@ -33,6 +33,13 @@ Default scheme (in `default-scheme.js`):
 - Contact number
 - Email address
 
+You also can specify a dependency between two fiels, for instance, if the "current employment" checkbox is checked it doesn't make sense to show "end date". You can do it like this:
+
+```
+// CurrentEmployment is id of a field this one depends on
+hideIfChecked: ['CurrentEmployment']
+```
+
 **TODO** Make a formal JSON scheme (https://json-schema.org/)
 
 ## Available Scripts

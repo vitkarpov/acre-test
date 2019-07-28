@@ -77,7 +77,7 @@ function DataDrivenForm({ scheme, formState, onSubmit }) {
       }}
     >
       <div className="app-data-form-lines-wrapper">
-        {scheme.map(({ id, fieldType, fieldProps, defaultChecked }) => {
+        {scheme.map(({ id, fieldType, fieldProps, defaultChecked, hideIfChecked }) => {
           const Field = Fields[fieldType];
 
           if (fieldType === 'RadioButtonField' || fieldType === 'CheckboxField') {
@@ -86,6 +86,13 @@ function DataDrivenForm({ scheme, formState, onSubmit }) {
             } else {
               fieldProps.checked = !!defaultChecked;
             }
+          }
+
+          if (hideIfChecked && hideIfChecked.every((seekedId) => {
+            const field = scheme.find(({ id }) => id === seekedId);
+            return field && field.fieldProps.checked;
+          })) {
+            return null;
           }
 
           return (
