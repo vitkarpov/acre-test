@@ -14,6 +14,7 @@ const EmailField = ({ name, placeholder, required, onChange }) => (
 EmailField.propTypes = {
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func
 };
 
