@@ -1,33 +1,58 @@
-.App {
-  text-align: center;
+.app {
+  width: 1000px;
+  padding: 20px;
+  margin: 0 auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.app-scheme-form {
+  margin: 40px 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-scheme-form-fieldset {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.app-scheme-form-header {
+  font-size: 21px;
+  line-height: 28px;
+  font-weight: bold;
+}
+
+.app-scheme-form-textarea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 500px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.app-submit {
+  border: 1px dashed green;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.app-data-form-lines-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #61dafb;
+.app-data-form-line {
+  margin: 20px 0;
+  flex-basis: 50%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-layout {
+  display: flex;
+}
+
+.app-col {
+  flex-basis: 50%;
+  padding: 20px;
+  border: 1px dashed lightsalmon;
+}
+
+.app-col + .app-col {
+  border-left: 0;
 }

@@ -10,11 +10,14 @@ function App() {
   const [formState, setFormState] = useState({});
 
   return (
-    <div className="App">
-      <form>
-        <fieldset>
-          <legend>Enter your JSON <span role="img" aria-label="here">👇</span></legend>
+    <div className="app">
+      <form className="app-scheme-form">
+        <fieldset className="app-scheme-form-fieldset">
+          <legend className="app-scheme-form-header">
+            Enter your JSON <span role="img" aria-label="here">👇</span>
+          </legend>
           <textarea
+            className="app-scheme-form-textarea"
             name="scheme"
             value={scheme}
             onChange={(e) => {
@@ -29,12 +32,12 @@ function App() {
             }}
           />
         </fieldset>
-        <fieldset>
-          <button type="submit">Update</button>
+        <fieldset className="app-scheme-form-fieldset">
+          <button className="app-submit" type="submit">Update</button>
         </fieldset>
       </form>
-      <div>
-        <div>
+      <div className="app-layout">
+        <div className="app-col">
           <h2>Data Driven Form</h2>
           {validScheme &&
             <DataDrivenForm
@@ -44,7 +47,7 @@ function App() {
           }
           {!validScheme && <div>Scheme parsing failed</div>}
         </div>
-        <div>
+        <div className="app-col">
           <h2>Form state</h2>
           <pre>{JSON.stringify(formState, null, 2)}</pre>
         </div>
@@ -60,19 +63,26 @@ function DataDrivenForm({ scheme, onSubmit }) {
   const onChange = (name, value) => setState(Object.assign({}, state, { [name]: value }));
 
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      onSubmit(state);
-    }}>
-      {scheme.map(({ id, fieldType, fieldProps }) => {
-        const Field = Fields[fieldType];
+    <form
+      className="app-data-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(state);
+      }}
+    >
+      <div className="app-data-form-lines-wrapper">
+        {scheme.map(({ id, fieldType, fieldProps }) => {
+          const Field = Fields[fieldType];
 
-        if (Field) {
-          return <Field key={id} {...fieldProps} onChange={onChange} />;
-        }
-        return `Unknown fieldType ${fieldType}`;
-      })}
-      <button type="submit">Go!</button>
+          return (
+            <div className="app-data-form-line" key={id}>
+              {Field && <Field {...fieldProps} onChange={onChange} />}
+              {!Field && `Unknown fieldType ${fieldType}`}
+            </div>
+          );
+        })}
+      </div>
+      <button className="app-submit" type="submit">Go!</button>
     </form>
   )
 }
