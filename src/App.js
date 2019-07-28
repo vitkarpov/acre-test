@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 import TextField from './components/TextField';
+import DateField from './components/DateField';
 
 const DEFAULT_SCHEME = [
   {
@@ -10,6 +11,13 @@ const DEFAULT_SCHEME = [
     fieldProps: {
       name: 'name',
       placeholder: 'John Doe'
+    }
+  },
+  {
+    id: 'StartDate',
+    fieldType: 'DateField',
+    fieldProps: {
+      name: 'start'
     }
   }
 ];
@@ -78,6 +86,8 @@ function DataDrivenForm({ scheme, onSubmit }) {
         switch (fieldType) {
           case 'TextField':
             return <TextField key={id} {...fieldProps} onChange={onChange} />;
+          case 'DateField':
+            return <DateField key={id} {...fieldProps} onChange={onChange} />;
           default:
             return `Unknown fieldType ${fieldType}`;
         }
