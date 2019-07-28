@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-
-import TextField from './components/TextField';
-import DateField from './components/DateField';
+import Fields from './Fields';
 
 const DEFAULT_SCHEME = [
   {
@@ -83,14 +81,12 @@ function DataDrivenForm({ scheme, onSubmit }) {
       onSubmit(state);
     }}>
       {scheme.map(({ id, fieldType, fieldProps }) => {
-        switch (fieldType) {
-          case 'TextField':
-            return <TextField key={id} {...fieldProps} onChange={onChange} />;
-          case 'DateField':
-            return <DateField key={id} {...fieldProps} onChange={onChange} />;
-          default:
-            return `Unknown fieldType ${fieldType}`;
+        const Field = Fields[fieldType];
+
+        if (Field) {
+          return <Field key={id} {...fieldProps} onChange={onChange} />;
         }
+        return `Unknown fieldType ${fieldType}`;
       })}
       <button type="submit">Go!</button>
     </form>
