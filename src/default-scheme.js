@@ -4,7 +4,8 @@ export default [
     fieldType: 'TextField',
     fieldProps: {
       name: 'job_title',
-      placeholder: 'CEO and Director'
+      placeholder: 'CEO and Director',
+      required: true
     }
   },
   {
@@ -37,7 +38,8 @@ export default [
     fieldType: 'TextField',
     fieldProps: {
       name: 'employer_name',
-      placeholder: 'Google'
+      placeholder: 'Google',
+      required: true
     }
   },
   {
