@@ -21,6 +21,17 @@ Each item in array of fields should have the following properties:
 - `fieldType` (enum of field types)
 - `fieldProps` (object with all the props a particular field needs)
 
+Default scheme (in `default-scheme.js`):
+
+- Job title
+- Employment period (radio button, "Fixed term" or "Permanent")
+- Current employment (checkbox, toggle yes/no)
+- Start date
+- End date
+- Employer name
+- Contact number
+- Email address
+
 **TODO** Make a formal JSON scheme (https://json-schema.org/)
 
 ## Available Scripts
