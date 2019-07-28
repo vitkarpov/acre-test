@@ -28,7 +28,8 @@ export default [
     id: 'CurrentEmployment',
     fieldType: 'CheckboxField',
     fieldProps: {
-      name: 'current_employment'
+      name: 'current_employment',
+      label: 'I currently work here'
     }
   },
   {
