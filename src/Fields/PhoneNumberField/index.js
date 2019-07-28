@@ -15,6 +15,7 @@ const PhoneNumberField = ({ name, placeholder, required, onChange }) => (
 PhoneNumberField.propTypes = {
   name: PropTypes.string.isRequired,
   required: PropTypes.bool,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func
 };
 
